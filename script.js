@@ -20,10 +20,10 @@ searchButton.addEventListener('click', () => {
             console.log(data.main.temp);
             console.log(data.main.humidity);
             // transfer content to html
-            document.querySelector('.city').innerHTML = data.name;
-            document.querySelector('.temp').innerHTML = data.main.temp;
-            document.querySelector('.humidity').innerHTML = data.main.humidity;
-            document.querySelector('.wind-speed').innerHTML = data.wind.speed;
+            document.querySelector('.city').innerHTML = "City: " + data.name;
+            document.querySelector('.temp').innerHTML = "Temp: " + data.main.temp;
+            document.querySelector('.humidity').innerHTML = "Humidity: " + data.main.humidity;
+            document.querySelector('.wind-speed').innerHTML = "Wind-Speed: " + data.wind.speed;
             
             
 
