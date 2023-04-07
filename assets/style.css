@@ -1,0 +1,12 @@
+.input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-outline {
+    flex: 1;
+  }
+  
+  #search-button {
+    margin-left: 10px;
+  }
