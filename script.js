@@ -18,7 +18,7 @@ var formSubmitHandler = function(event) {
 
     // if cityname exists, get weather data for that city
     if (cityname) {
-        // getCityWeather(cityname);
+        getCityWeather(cityname);
         //append data attributes to recent search buttons
         // save cityname to localStorage
         localStorage.setItem('cityname', cityname);
@@ -28,12 +28,7 @@ var formSubmitHandler = function(event) {
         recentButton.textContent = cityname;
         recentButton.classList.add('btn');
         recentButtonsEl.appendChild(recentButton);
-
         
-
-        
-
-
         // clear old content
         currentweatherContainerEl.textContent = '';
         cityInputEl.value = '';
@@ -50,33 +45,63 @@ var buttonClickHandler = function(event) {
     // if cityname exists, get weather data for that city
     if (cityname) {
         getCityWeather(cityname);
+        // clear old content
+        currentweatherContainerEl.textContent = '';
+        
     }
+};
+
+// function to get weather data from openweathermap api
+
+var getCityWeather = function(cityname) {
+    // format the openweathermap api url
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=" + APIKKey;
+    // declare cityname variable
+    var cityname = cityname;
+
+    // make a request to the url
+    fetch(queryURL)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            console.log(queryURL);
+            console.log(data.main.temp);
+            // call on displayWeather function
+            displayWeather(data, cityname);
+        });
+};
+
+
+// create elements on the page to display weather data i nthe weather report container
+var displayWeather = function(data, cityname) {
+    // create a div element to hold weather data
+    var weatherReportEl = document.createElement('div');
+    weatherReportEl.classList = 'card-body';
+    // create a span element to hold city name
+    var citynameEl = document.createElement('span');
+    citynameEl.textContent = cityname;
+    citynameEl.classList = 'card-title';
+    // create an image element to hold weather icon
+    var weatherIconEl = document.createElement('img');
+    weatherIconEl.setAttribute('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+    // create a span element to hold temperature data
+    var temperatureEl = document.createElement('span');
+    temperatureEl.textContent = 'Temperature: ' + data.main.temp + ' °F';
+    temperatureEl.classList = 'card-text';
+
+    // append the cityname, weather icon, and temperature to the weather report div
+    var weatherContainer = document.getElementById('current-weather-container');
+    weatherReportEl.appendChild(citynameEl);
+    weatherReportEl.appendChild(weatherIconEl);
+    weatherReportEl.appendChild(temperatureEl);
+    weatherContainer.appendChild(weatherReportEl);
 };
 
 
 
 
-// searchButton.addEventListener('click', () => {
-//     var city = searchInput.value;
-//     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKKey;
 
-//     fetch(queryURL)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//             console.log(queryURL);
-//             console.log(data.main.temp);
-//             console.log(data.main.humidity);
-            // transfer content to html
-        // displayWeather(data);
-            // document.querySelector('.city').innerHTML = "City: " + data.name;
-            // document.querySelector('.temp').innerHTML = "Temp: " + data.main.temp;
-            // document.querySelector('.humidity').innerHTML = "Humidity: " + data.main.humidity;
-            // document.querySelector('.wind-speed').innerHTML = "Wind-Speed: " + data.wind.speed;
-            
-
-//         });
-// });
+// add event listener to city form and recent search buttons
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 recentButtonsEl.addEventListener('click', buttonClickHandler);
