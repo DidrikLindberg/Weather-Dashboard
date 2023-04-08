@@ -2,9 +2,11 @@
 
 const searchButton = document.getElementById('search-button');
 const searchInput = document.getElementById('search-input');
-const city = document.getElementById('city');
+// const city = document.getElementById('city');
 
 var APIKKey = "4e82548e9a516fc5ec14f1ab6d4a2c48"
+var abc = 
+
 
 
 
@@ -31,6 +33,5 @@ searchButton.addEventListener('click', () => {
 
         })
 })
-
 
 
