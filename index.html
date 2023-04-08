@@ -14,11 +14,63 @@
     <header class="p-5 text-center text-white bg-primary">
         <h1> Weather Dashboard </h1>
     </header>
-    <section class="container my-5">
-        <!-- Use row class to create row in the container -->
+
+
+    <main class="flex-row justify-space-between">
+      <div class="col-12 col-md-4">
+  
+        <div class="card">
+          <h3 class="card-header text-uppercase">Search By City</h3>
+          <form id="city-form" class="card-body">
+            <label class="form-label" for="cityname">City</label>
+            <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" placeholder="Los Angeles" />
+            <button type="submit" class="btn">See Weather Report</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 class="card-header text-uppercase">Recent Searches</h3>
+          <div id="recent-cities-buttons" class="card-body">
+            <button data-city="" class="btn"></button>
+            <button data-city="" class="btn"></button>
+            <button data-city="" class="btn"></button>
+          </div>
+        </div>
+      </div>
+  
+
+  
+      <div class="col-12 col-md-8">
+        <h2 class="subtitle">Weather Report for: <span id="city-search-term"></span></h2>
+        <div id="current-weather-container" class="list-group"></div>
+      </div>
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <main class="flex-row justify-space-between">
+    <section class="col-12 col-md-4">
+
         <div class="row">
             <div class="col-12 col-md-4 col-lg-3">
-                <h3>Sidebar Content</h3>
+                <h3 class="card-header text-uppercase">Sidebar Content</h3>
+                <form id="user-form" class="card-body">
                 <div class="input-group">
                     <div class="form-outline">
                       <input id="search-input" type="search" id="form1" class="form-control" placeholder="Search" />
@@ -27,21 +79,24 @@
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
+                </form>
               </div>
         <div class="city">City:</div>
         <div class="temp">Temp:</div>
         <div class="humidity">Humidity:</div>
         <div class="wind-speed">Wind-Speed:</div>
+        </div>
+        </section>
 
-        </div> 
-        
-
-
-      
-    
+     
+          <div class="card">
+          <h2 class="subtitle">The weather in:  <span id="city-search-term"></span></h2>
+          <div id="weather-container" class="bg-body"></div>
           
         </div>
-      </section>
+      
+
+    </main> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
