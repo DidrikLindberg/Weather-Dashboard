@@ -16,8 +16,23 @@ var formSubmitHandler = function(event) {
     // get value from input element
     var cityname = cityInputEl.value.trim();
 
+    // if cityname exists, get weather data for that city
     if (cityname) {
-        getCityWeather(cityname);
+        // getCityWeather(cityname);
+        //append data attributes to recent search buttons
+        // save cityname to localStorage
+        localStorage.setItem('cityname', cityname);
+        // create button for recent search and set data attribute to cityname and text to cityname with a class of btn
+        var recentButton = document.createElement('button');
+        recentButton.setAttribute('data-cityname', cityname);
+        recentButton.textContent = cityname;
+        recentButton.classList.add('btn');
+        recentButtonsEl.appendChild(recentButton);
+
+        
+
+        
+
 
         // clear old content
         currentweatherContainerEl.textContent = '';
@@ -26,6 +41,18 @@ var formSubmitHandler = function(event) {
         alert('Please enter a City');
     }
 };
+
+// button click handler for recent searches
+
+var buttonClickHandler = function(event) {
+    var cityname = event.target.getAttribute('data-cityname');
+
+    // if cityname exists, get weather data for that city
+    if (cityname) {
+        getCityWeather(cityname);
+    }
+};
+
 
 
 
