@@ -101,7 +101,11 @@ getFiveDayForecast = function(lat, lon, cityname) {
 var displayWeather = function(data, cityname) {
     // create a div element to hold weather data
     var weatherReportEl = document.createElement('div');
-    weatherReportEl.classList = 'card-body';
+    // weatherReportEl.classList = 'card-body';
+    // create a h2 element to hold Weather Report for:
+    var weatherReportTitleEl = document.createElement('h2');
+    weatherReportTitleEl.textContent = 'Weather Report for:';
+    weatherReportTitleEl.classList = 'card-title';
     // create a span element to hold city name
     var citynameEl = document.createElement('span');
     citynameEl.textContent = cityname;
@@ -111,14 +115,25 @@ var displayWeather = function(data, cityname) {
     weatherIconEl.setAttribute('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
     // create a span element to hold temperature data
     var temperatureEl = document.createElement('span');
-    temperatureEl.textContent = 'Temperature: ' + data.main.temp + ' °F';
+    temperatureEl.textContent = 'Temperature: ' + data.main.temp + ' °F   ';
     temperatureEl.classList = 'card-text';
+    // create a span element to hold humidity data
+    var humidityEl = document.createElement('span');
+    humidityEl.textContent = 'Humidity: ' + data.main.humidity + '%   ';
+    humidityEl.classList = 'card-text';
+    // create a span element to hold wind speed data
+    var windSpeedEl = document.createElement('span');
+    windSpeedEl.textContent = 'Wind Speed: ' + data.wind.speed + ' MPH';
+    windSpeedEl.classList = 'card-text';
 
     // append the cityname, weather icon, and temperature to the weather report div
     var weatherContainer = document.getElementById('current-weather-container');
+    weatherReportEl.appendChild(weatherReportTitleEl);
     weatherReportEl.appendChild(citynameEl);
     weatherReportEl.appendChild(weatherIconEl);
     weatherReportEl.appendChild(temperatureEl);
+    weatherReportEl.appendChild(humidityEl);
+    weatherReportEl.appendChild(windSpeedEl);
     weatherContainer.appendChild(weatherReportEl);
 };
 
@@ -142,7 +157,7 @@ var displayFiveDayForecastWeather = function(data, cityname) {
         if (forecastdate.getHours() === 12) {
             //create a new card element for each day
             var ForecastCard = document.createElement('div');
-            ForecastCard.classList = 'forecast-card', 'card', 'col-12 col-md-7';
+            ForecastCard.classList = 'forecast-card', 'col-12 col-md-8';
 
             // add data to daily forecast array
             dailyForecast.push(data.list[i]);
@@ -162,14 +177,24 @@ var displayFiveDayForecastWeather = function(data, cityname) {
     weatherIconEl.setAttribute('src', 'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png');
     // create a span element to hold temperature data
     var temperatureEl = document.createElement('span');
-    temperatureEl.textContent = 'Temperature: ' + data.list[i].main.temp + ' °F';
+    temperatureEl.textContent = 'Temperature: ' + data.list[i].main.temp + ' °F   ';
     temperatureEl.classList = 'card-text';
+    // create a span element to hold humidity data
+    var humidityEl = document.createElement('span');
+    humidityEl.textContent = 'Humidity: ' + data.list[i].main.humidity + '%   ';
+    humidityEl.classList = 'card-text';
+    // create a span element to hold wind speed data
+    var windSpeedEl = document.createElement('span');
+    windSpeedEl.textContent = 'Wind Speed: ' + data.list[i].wind.speed + ' MPH';
+    windSpeedEl.classList = 'card-text';
 
     // append the cityname, weather icon, and temperature to the weather report div
     var weatherForecastContainer = document.getElementById('forecast-container');
     ForecastCard.appendChild(forecastdateEl);
     ForecastCard.appendChild(weatherIconEl);
     ForecastCard.appendChild(temperatureEl);
+    ForecastCard.appendChild(humidityEl);
+    ForecastCard.appendChild(windSpeedEl);
     weatherForecastContainer.appendChild(ForecastCard);
 };
 };
