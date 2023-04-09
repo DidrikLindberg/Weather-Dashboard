@@ -88,7 +88,10 @@
     display: inline-block;
   }
   
-
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+}
   .forecast-card {
     height: 100px; /* adjust the height as per your preference */
     border: 1px solid gray;

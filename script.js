@@ -157,7 +157,7 @@ var displayFiveDayForecastWeather = function(data, cityname) {
         if (forecastdate.getHours() === 12) {
             //create a new card element for each day
             var ForecastCard = document.createElement('div');
-            ForecastCard.classList = 'forecast-card', 'col-12 col-md-8';
+            ForecastCard.classList = 'forecast-card';
 
             // add data to daily forecast array
             dailyForecast.push(data.list[i]);
