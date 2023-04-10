@@ -17,29 +17,12 @@ var formSubmitHandler = function(event) {
     // get value from input element
     var cityname = cityInputEl.value.trim();
 
-    // if cityname exists, get weather data for that city
-    if (cityname) {
-                // check if cityname already exists in recent search buttons
-                var existingButton = document.querySelector(`button[data-cityname="${cityname}"]`);
-                if (!existingButton) {
-                    // append data attributes to recent search buttons
-                    // save cityname to localStorage
-                    localStorage.setItem('cityname', cityname);
-                    // create button for recent search and set data attribute to cityname and text to cityname with a class of btn
-                    var recentButton = document.createElement('button');
-                    recentButton.setAttribute('data-cityname', cityname);
-                    recentButton.textContent = cityname;
-                    recentButton.classList.add('btn');
-                    recentButtonsEl.appendChild(recentButton);
-                }
+
         getCityWeather(cityname);
 
         currentweatherContainerEl.textContent = '';
         cityInputEl.value = '';
-    } else {
-        alert('Please enter a City');
-    }
-};
+    } 
 
 // button click handler for recent searches
 
@@ -47,12 +30,10 @@ var buttonClickHandler = function(event) {
     var cityname = event.target.getAttribute('data-cityname');
 
     // if cityname exists, get weather data for that city
-    if (cityname) {
+
         getCityWeather(cityname);
         // clear old content
         currentweatherContainerEl.textContent = '';
-        
-    }
 };
 
 // function to get weather data from openweathermap api
@@ -65,19 +46,38 @@ var getCityWeather = function(cityname) {
 
     // make a request to the url
     fetch(queryURL)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            console.log(queryURL);
-            console.log(data.main.temp);
-            // call on displayWeather function
-            displayWeather(data, cityname);
-            // get latitude and longitude data from response
-            var lat = data.coord.lat;
-            var lon = data.coord.lon;
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        console.log(queryURL);
+        console.log(data.main.temp);
 
-            getFiveDayForecast(lat, lon, cityname);
-        });
+        // call on displayWeather function
+        displayWeather(data, cityname);
+        // get latitude and longitude data from response
+        var lat = data.coord.lat;
+        var lon = data.coord.lon;
+
+        getFiveDayForecast(lat, lon, cityname);
+
+        // check if cityname already exists in recent search buttons
+        var existingButton = document.querySelector(`button[data-cityname="${cityname}"]`);
+        if (!existingButton) {
+            // append data attributes to recent search buttons
+            // save cityname to localStorage
+            localStorage.setItem('cityname', cityname);
+            // create button for recent search and set data attribute to cityname and text to cityname with a class of btn
+            var recentButton = document.createElement('button');
+            recentButton.setAttribute('data-cityname', cityname);
+            recentButton.textContent = cityname;
+            recentButton.classList.add('btn');
+            recentButtonsEl.appendChild(recentButton);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error: City not found');
+    });
 };
 
 // function to get 5 day forecast data from openweathermap api
