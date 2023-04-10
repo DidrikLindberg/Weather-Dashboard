@@ -77,6 +77,7 @@ var getCityWeather = function(cityname) {
     .catch(error => {
         console.error('Error:', error);
         alert('Error: City not found');
+
     });
 };
 
@@ -137,7 +138,7 @@ var displayWeather = function(data, cityname) {
     weatherContainer.appendChild(weatherReportEl);
 };
 
-var displayFiveDayForecastWeather = function(data, cityname) {
+var displayFiveDayForecastWeather = function(data) {
     // create a div element to hold weather data
     var weatherForecastContainer = document.getElementById('forecast-container');
     weatherForecastContainer.innerHTML = '';
@@ -197,7 +198,9 @@ var displayFiveDayForecastWeather = function(data, cityname) {
     ForecastCard.appendChild(windSpeedEl);
     weatherForecastContainer.appendChild(ForecastCard);
 };
+
 };
+
 };
 
 
